@@ -16,14 +16,11 @@
  * along with CSV-js.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var CSV;
-
-if (!CSV) {
-    CSV = {};
-}
-
-(function () {
+(function (window, undefined) {
     'use strict';
+
+    // Define local CSV object.
+    var CSV = {};
 
     /**
      * Split CSV text into an array of lines.
@@ -186,60 +183,72 @@ if (!CSV) {
         return objects;
     }
 
-    if (typeof CSV.parse !== 'function') {
-        /**
-         * Parses CSV text and returns an array of objects, using the first CSV row's fields as keys for each object's values.
-         */
-        CSV.parse = function (text, lineEnding, delimiter, ignoreEmptyLines) {
-            var config = {
-                    lineEnding:       /[\r\n]/,
-                    delimiter:        ',',
-                    ignoreEmptyLines: true
-                },
+    /**
+     * Parses CSV text and returns an array of objects, using the first CSV row's fields as keys for each object's values.
+     */
+    CSV.parse = function (text, lineEnding, delimiter, ignoreEmptyLines) {
+        var config = {
+                lineEnding:       /[\r\n]/,
+                delimiter:        ',',
+                ignoreEmptyLines: true
+            },
 
-                lines, tokenizedLines, objects;
+            lines, tokenizedLines, objects;
 
-            // Empty text is a syntax error!
-            if (text === '') {
-                throw new SyntaxError('empty input');
+        // Empty text is a syntax error!
+        if (text === '') {
+            throw new SyntaxError('empty input');
+        }
+
+        if (typeof lineEnding !== 'undefined') {
+            if (lineEnding instanceof RegExp) {
+                config.lineEnding = lineEnding;
+            } else {
+                config.lineEnding = new RegExp('[' + String(lineEnding) + ']', 'g');
             }
+        }
 
-            if (typeof lineEnding !== 'undefined') {
-                if (lineEnding instanceof RegExp) {
-                    config.lineEnding = lineEnding;
-                } else {
-                    config.lineEnding = new RegExp('[' + String(lineEnding) + ']', 'g');
-                }
-            }
+        if (typeof delimiter !== 'undefined') {
+            config.delimiter = String(delimiter);
+        }
 
-            if (typeof delimiter !== 'undefined') {
-                config.delimiter = String(delimiter);
-            }
+        if (typeof ignoreEmptyLines !== 'undefined') {
+            config.ignoreEmptyLines = !!ignoreEmptyLines;
+        }
 
-            if (typeof ignoreEmptyLines !== 'undefined') {
-                config.ignoreEmptyLines = !!ignoreEmptyLines;
-            }
+        // Step 1: Split text into lines based on line ending.
+        lines = splitLines(text, config.lineEnding);
 
-            // Step 1: Split text into lines based on line ending.
-            lines = splitLines(text, config.lineEnding);
+        // Step 2: Get rid of empty lines. (Optional)
+        if (config.ignoreEmptyLines) {
+            removeEmptyLines(lines);
+        }
 
-            // Step 2: Get rid of empty lines. (Optional)
-            if (config.ignoreEmptyLines) {
-                removeEmptyLines(lines);
-            }
+        // Single line is a syntax error!
+        if (lines.length < 2) {
+            throw new SyntaxError('missing header');
+        }
 
-            // Single line is a syntax error!
-            if (lines.length < 2) {
-                throw new SyntaxError('missing header');
-            }
+        // Step 3: Tokenize lines using delimiter.
+        tokenizedLines = tokenizeLines(lines, config.delimiter);
 
-            // Step 3: Tokenize lines using delimiter.
-            tokenizedLines = tokenizeLines(lines, config.delimiter);
+        // Step 4: Using first line's tokens as a list of object literal keys, assemble remainder of lines into an array of objects.
+        objects = assembleObjects(tokenizedLines);
 
-            // Step 4: Using first line's tokens as a list of object literal keys, assemble remainder of lines into an array of objects.
-            objects = assembleObjects(tokenizedLines);
+        return objects;
+    };
 
-            return objects;
-        };
+    // Expose local CSV object somehow.
+    if (typeof module === 'object' && module && typeof module.exports === 'object') {
+        // If Node module pattern is supported, use it and do not create global.
+        module.exports = CSV;
+    } else if (typeof define === 'function' && define.amd) {
+        // Node module pattern not supported, but AMD module pattern is, so use it.
+        define([], function () {
+            return CSV;
+        });
+    } else {
+        // No AMD loader is being used; expose to window (create global).
+        window.CSV = CSV;
     }
-}());
+}(window));

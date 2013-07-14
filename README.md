@@ -1,4 +1,4 @@
-﻿CSV-js
+CSV-js
 ======
 
 A CSV (comma-separated values) parser written in JavaScript.

@@ -1,0 +1,21 @@
+{
+    "es5": true,
+
+    "predef": [
+        "asyncTest",
+        "deepEqual",
+        "equal",
+        "expect",
+        "module",
+        "notDeepEqual",
+        "notEqual",
+        "notStrictEqual",
+        "ok",
+        "QUnit",
+        "raises",
+        "start",
+        "stop",
+        "strictEqual",
+        "test"
+    ]
+}

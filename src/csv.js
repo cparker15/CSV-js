@@ -73,7 +73,7 @@ if (!CSV) {
             token = lineTokens[i].replace(/^[\s]*|[\s]*$/g, '');
             quote = '';
 
-            if (token.charAt(0) === '"' || token.charAt(0) === "'") {
+            if (token.charAt(0) === '"' || token.charAt(0) === '\'') {
                 quote = token.charAt(0);
             }
 
@@ -117,7 +117,7 @@ if (!CSV) {
         for (i = 0; i < lineTokens.length; i++) {
             if (lineTokens[i].charAt(0) === '"') {
                 lineTokens[i] = lineTokens[i].replace(/^"|"$/g, '');
-            } else if (lineTokens[i].charAt(0) === "'") {
+            } else if (lineTokens[i].charAt(0) === '\'') {
                 lineTokens[i] = lineTokens[i].replace(/^'|'$/g, '');
             }
         }

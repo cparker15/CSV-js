@@ -37,7 +37,7 @@ test('parse', function () {
     ok(result instanceof Object, 'element is an object');
     equal(Object.keys(result[0]).length, 2, 'object has two properties');
     ok(result[0].hasOwnProperty('foo'), 'object has property foo');
-    equal(result[0]['foo'], 'a', 'value of foo is "a"');
+    equal(result[0].foo, 'a', 'value of foo is "a"');
     ok(result[0].hasOwnProperty('bar'), 'object has property bar');
-    equal(result[0]['bar'], 'b', 'value of bar is "b"');
+    equal(result[0].bar, 'b', 'value of bar is "b"');
 });

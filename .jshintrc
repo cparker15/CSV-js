@@ -1,0 +1,13 @@
+{
+    // Enforcing
+    "camelcase": true,
+    "immed":     true,
+    "latedef":   true,
+    "newcap":    true,
+    "quotmark":  "single",
+    "trailing":  true,
+
+    // Environments
+    "node":  true,
+    "devel": false
+}

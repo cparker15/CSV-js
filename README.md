@@ -17,7 +17,6 @@ Prerequisites:
 After cloning this repo, here's how to build:
 
     $ npm install
-    $ bower install
     $ grunt
 
 This will download all dependencies, lint, test, and minify the library.

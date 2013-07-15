@@ -1,4 +1,4 @@
-/**
+/*!
  * CSV-js: A JavaScript library for parsing CSV-encoded data.
  * Copyright (C) 2009-2013 Christopher Parker <http://www.cparker15.com/>
  *

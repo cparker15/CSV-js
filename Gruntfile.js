@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            build: ['build', 'components'],
+            build: ['build', 'bower_components'],
             dist:  ['dist']
         }
     });

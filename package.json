@@ -1,6 +1,6 @@
 {
   "name": "csv-js",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A CSV (comma-separated values) parser written in JavaScript.",
   "homepage": "http://www.cparker15.com/code/utils/csv-to-json/",
   "bugs": "https://github.com/cparker15/CSV-js/issues",

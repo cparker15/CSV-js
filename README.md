@@ -9,7 +9,6 @@ Originally part of [Christopher Parker][github-cparker15]'s [CSV to JSON convert
 Prerequisites:
 
 * [Node][nodejs] + [NPM][npmjs]
-* [Bower][bower]
 * [Grunt CLI][gruntjs]
 
 After cloning this repo, here's how to build:

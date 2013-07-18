@@ -1,12 +1,10 @@
-CSV-js
-======
+# CSV-js [![Build Status](https://secure.travis-ci.org/cparker15/CSV-js.png?branch=master)](http://travis-ci.org/cparker15/CSV-js)
 
 A CSV (comma-separated values) parser written in JavaScript.
 
 Originally part of [Christopher Parker][github-cparker15]'s [CSV to JSON converter][github-csv-to-json]. Because of this, some feature requests, bug reports, etc. may be filed there, instead. Before opening a new issue here, please make sure it doesn't already exist there.
 
-Building
---------
+## Building
 
 Prerequisites:
 
@@ -23,8 +21,7 @@ This will download all dependencies, lint, test, and minify the library.
 
 The minified library resides at `dist/csv.min.js`.
 
-Using
------
+## Using
 
 Basic example:
 

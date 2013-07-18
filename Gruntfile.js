@@ -5,15 +5,6 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        bower: {
-            install: {
-                options: {
-                    install: true,
-                    copy: false
-                }
-            }
-        },
-
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
@@ -56,6 +47,11 @@ module.exports = function (grunt) {
         clean: {
             build: ['build', 'bower_components'],
             dist:  ['dist']
+        },
+
+        watch: {
+            files: ['src/*.js', 'test/*.js'],
+            tasks: ['ci']
         }
     });
 
@@ -65,6 +61,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('init', ['clean:build', 'clean:dist']);
     grunt.registerTask('lint', 'jshint');

@@ -1,29 +1,34 @@
 {
-  "name": "csv-js",
-  "version": "0.2.4",
-  "description": "A CSV (comma-separated values) parser written in JavaScript.",
-  "homepage": "http://www.cparker15.com/code/utils/csv-to-json/",
-  "bugs": "https://github.com/cparker15/CSV-js/issues",
-  "author": "Christopher Parker <cparker15@cparker15.com> (http://www.cparker15.com)",
-  "contributors": [
-    "Christopher Parker <cparker15@cparker15.com> (http://www.cparker15.com)",
-    "Joel Truher (https://github.com/truher)"
-  ],
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-qunit": "~0.2.2",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-bower-task": "~0.2.3"
-  },
-  "keywords": [
-    "csv",
-    "parser"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/cparker15/CSV-js.git"
-  }
+    "name": "csv-js",
+    "description": "A CSV (comma-separated values) parser written in JavaScript.",
+    "version": "0.2.5",
+    "author": "Christopher Parker <cparker15@cparker15.com> (http://www.cparker15.com)",
+    "contributors": [
+        "Christopher Parker <cparker15@cparker15.com> (http://www.cparker15.com)",
+        "Joel Truher (https://github.com/truher)"
+    ],
+    "homepage": "http://www.cparker15.com/code/utils/csv-to-json/",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/cparker15/CSV-js.git"
+    },
+    "bugs": "https://github.com/cparker15/CSV-js/issues",
+    "scripts": {
+        "test": "grunt ci"
+    },
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+    "keywords": [
+        "csv",
+        "parser"
+    ],
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt-contrib-copy": "~0.4.1",
+        "grunt-contrib-clean": "~0.4.1"
+    }
 }

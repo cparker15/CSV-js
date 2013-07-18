@@ -1,21 +1,9 @@
 {
     "es5": true,
+    "globalstrict": true,
 
     "predef": [
-        "asyncTest",
-        "deepEqual",
-        "equal",
-        "expect",
-        "module",
-        "notDeepEqual",
-        "notEqual",
-        "notStrictEqual",
-        "ok",
-        "QUnit",
-        "raises",
-        "start",
-        "stop",
-        "strictEqual",
-        "test"
+        "require",
+        "exports"
     ]
 }

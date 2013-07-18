@@ -251,4 +251,4 @@
         // No AMD loader is being used; expose to window (create global).
         window.CSV = CSV;
     }
-}(window));
+}(typeof window !== 'undefined' ? window : {}));

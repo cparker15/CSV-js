@@ -1,12 +1,9 @@
 {
     "name": "csv-js",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "ignore": [
         "node_modules",
         "components",
         "bower_components"
-    ],
-    "devDependencies": {
-        "qunit": "~1.11.0"
-    }
+    ]
 }

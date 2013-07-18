@@ -21,8 +21,8 @@ module.exports = function (grunt) {
             all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
         },
 
-        qunit: {
-            all: ['test/**/*.html']
+        nodeunit: {
+            all: ['test/**/*.js']
         },
 
         uglify: {
@@ -60,27 +60,20 @@ module.exports = function (grunt) {
     });
 
     // Load Grunt tasks from NPM packages
-    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
+    grunt.registerTask('init', ['clean:build', 'clean:dist']);
+    grunt.registerTask('lint', 'jshint');
+    grunt.registerTask('test', 'nodeunit');
+    grunt.registerTask('build', ['copy:build', 'uglify:build']);
+    grunt.registerTask('dist', ['copy:dist', 'clean:build']);
+
+    grunt.registerTask('ci', ['lint', 'test']);
+
     // Default task(s).
-    grunt.registerTask('default', [
-        'clean:build', // start with a clean slate
-        'clean:dist',
-
-        'jshint',     // lint our JS in src/ and test/
-        'copy:build', // copy our JS from src/ to build/
-        'bower',      // install Bower components to build/lib/
-        'qunit',      // perform unit tests (from build/)
-
-        'uglify:build', // minify our JS in build/
-
-        'copy:dist', // copy everything from build/ to dist/
-
-        'clean:build' // cleanup build/
-    ]);
+    grunt.registerTask('default', ['init', 'lint', 'test', 'build', 'dist']);
 };

@@ -17,12 +17,16 @@
         "test": "grunt ci"
     },
     "engines": {
-        "node": ">= 0.8.0"
+        "node": ">= 0.8.0",
+        "npm": ">=1.2.10"
     },
     "keywords": [
         "csv",
         "parser"
     ],
+    "peerDependencies": {
+        "grunt-cli": "~0.1.7"
+    },
     "devDependencies": {
         "grunt": "~0.4.1",
         "grunt-contrib-jshint": "~0.6.0",

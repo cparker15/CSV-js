@@ -150,7 +150,7 @@
     /**
      * Converts an array of tokenized lines into an array of object literals, using the header's tokens for each object's keys.
      */
-    function assembleObjects(tokenizedLines) {
+    function assembleObjects(tokenizedLines, keyFormatter) {
         var i, j,
             tokenizedLine, obj, key,
             objects = [],
@@ -168,6 +168,12 @@
 
                 for (j = 0; j < keys.length; j++) {
                     key = keys[j];
+                    if (typeof keyFormatter === 'function') {
+                        key = keyFormatter(key);
+                    }
+                    if ( ! key) {
+                        throw new SyntaxError('header fields don\'t format as valid keys');
+                    }
 
                     if (j < tokenizedLine.length) {
                         obj[key] = tokenizedLine[j];
@@ -186,11 +192,12 @@
     /**
      * Parses CSV text and returns an array of objects, using the first CSV row's fields as keys for each object's values.
      */
-    CSV.parse = function (text, lineEnding, delimiter, ignoreEmptyLines) {
+    CSV.parse = function (text, lineEnding, delimiter, ignoreEmptyLines, keyFormatter) {
         var config = {
                 lineEnding:       /[\r\n]/,
                 delimiter:        ',',
-                ignoreEmptyLines: true
+                ignoreEmptyLines: true,
+                keyFormatter:     null, /* e.g: function(key){ return key.toLowerCase().replace(/[^a-zA-Z0-9_]/g, '_').replace(/_+/, '_').replace(/^_+|_+$/, ''); } // "  'lots%20of-JUNK!!" --> "lots_20of_junk" */
             },
 
             lines, tokenizedLines, objects;
@@ -216,6 +223,10 @@
             config.ignoreEmptyLines = !!ignoreEmptyLines;
         }
 
+        if (typeof keyFormatter !== 'undefined') {
+            config.keyFormatter = keyFormatter;
+        }
+
         // Step 1: Split text into lines based on line ending.
         lines = splitLines(text, config.lineEnding);
 
@@ -233,7 +244,7 @@
         tokenizedLines = tokenizeLines(lines, config.delimiter);
 
         // Step 4: Using first line's tokens as a list of object literal keys, assemble remainder of lines into an array of objects.
-        objects = assembleObjects(tokenizedLines);
+        objects = assembleObjects(tokenizedLines, config.keyFormatter);
 
         return objects;
     };
